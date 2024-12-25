@@ -6,6 +6,7 @@ import { FaRegUser } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useState } from 'react';
+import { useSelector } from "react-redux";
 
 const navigation = [
   {name: "Dashboard", href:"/user-dashboard"},
@@ -17,8 +18,9 @@ const navigation = [
 function Navbar() {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const cartItems = useSelector(state => state.cart.cartItems);
 
-  const currentUser = true;
+  const currentUser = false;
 
   return (
     <header className="max-w-screen-2xl mx-auto px-4 py-6">
@@ -74,7 +76,9 @@ function Navbar() {
                   </button>
                   <Link to='/cart' className='bg-primary p-1 sm:px-6 px-2 flex items-center rounded-sm'>
                     <MdOutlineShoppingCart className='size-6'/>
-                    <span className='text-sm font-semibold sm:ml-1'>0</span>
+                    {
+                      cartItems.length > 0 ?  <span className="text-sm font-semibold sm:ml-1">{cartItems.length}</span> :  <span className="text-sm font-semibold sm:ml-1">0</span>
+                    }
                   </Link>
                 </div>
             </div>
