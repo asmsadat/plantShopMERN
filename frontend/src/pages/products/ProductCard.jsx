@@ -1,17 +1,18 @@
+/* eslint-disable react/prop-types */
 import { FiShoppingCart } from 'react-icons/fi'
 import { getImgUrl } from '../../utils/getImgUrl'
-
 import { Link } from'react-router-dom'
-
 import { useDispatch } from'react-redux'
 import { addToCart } from '../../redux/features/cart/cartSlice'
 
 const BookCard = ({book}) => {
+
     const dispatch =  useDispatch();
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product))
     }
+    
     return (
         <div className=" rounded-lg transition-shadow duration-300">
             <div
@@ -28,9 +29,9 @@ const BookCard = ({book}) => {
                 </div>
 
                 <div>
-                    <Link to={`/books/${book._id}`}>
+                    <Link to="/">
                         <h3 className="text-xl font-semibold hover:text-blue-600 mb-3">
-                       {book?.title}
+                        {book?.title}
                         </h3>
                     </Link>
                     <p className="text-gray-600 mb-5">{book?.description.length > 80 ? `${book.description.slice(0, 80)}...` : book?.description}</p>
