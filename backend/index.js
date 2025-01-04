@@ -1,20 +1,30 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 require('dotenv').config();
 
-const app = express();
+const productRoutes = require("./routes/productRoute");
 
 const port = process.env.PORT || 5000;
 
-// infoasmsadat
-// T5bQvUAlYjz7RN5I
+const app = express();
+
+// middleware
+app.use(express.json());
+app.use(cors({
+  origin: ['http://localhost:5173'],
+  credentials: true,
+}))
+
+// routes
+app.use("/api/products", productRoutes);
 
 async function main() {
   await mongoose.connect(
     process.env.DB_URL
   );
   app.get("/", (req, res) => {
-    res.send("Hello world!");
+    res.send("Server is running!");
   });
 }
 
