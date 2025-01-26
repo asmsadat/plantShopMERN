@@ -4,6 +4,8 @@ const cors = require("cors");
 require('dotenv').config();
 
 const productRoutes = require("./routes/productRoute");
+const orderRoutes = require("./routes/orderRoute");
+const userRoutes = require("./routes/userRoute");
 
 const port = process.env.PORT || 5000;
 
@@ -18,6 +20,8 @@ app.use(cors({
 
 // routes
 app.use("/api/products", productRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/auth", userRoutes);
 
 async function main() {
   await mongoose.connect(

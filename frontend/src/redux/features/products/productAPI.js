@@ -45,7 +45,7 @@ const productsAPI = createApi({
       }),
       invalidatesTags: ["Products"],
     }),
-    deleteBook: builder.mutation({
+    deleteProduct: builder.mutation({
       query: (id) => ({
         url: `/delete/${id}`,
         method: "DELETE",
@@ -60,6 +60,6 @@ export const {
   useFetchProductByIdQuery,
   useAddProductMutation,
   useUpdateProductMutation,
-  useDeleteBookMutation,
+  useDeleteProductMutation,
 } = productsAPI;
 export default productsAPI;

@@ -3,15 +3,19 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import Swal from'sweetalert2';
+import { useCreateOrderMutation } from "../../redux/features/orders/ordersAPI";
 
 const CheckoutPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
+  const navigate =  useNavigate();
   const totalPrice = cartItems
     .reduce((acc, item) => acc + item.price, 0)
     .toFixed(2);
 
-    const { currentUser } = useAuth();
+  const { currentUser } = useAuth();
 
   const {
     register,
@@ -20,7 +24,7 @@ const CheckoutPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
     const newOrder = {
       name: data.name,
@@ -35,7 +39,25 @@ const CheckoutPage = () => {
       productIds: cartItems.map((item) => item?._id),
       totalPrice: totalPrice,
     };
+    try {
+      await createOrder(newOrder).unwrap();
+      Swal.fire({
+        title: "Order Confirmed",
+        text: "Your order placed successfully!",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "OK",
+      });
+      navigate("/orders");
+    } catch (error) {
+      console.error("Error place an order", error);
+      alert("Error place an order");
+    }
   };
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <section>
@@ -46,8 +68,12 @@ const CheckoutPage = () => {
               <h2 className="font-semibold text-xl text-gray-600 mb-2">
                 Cash On Delevary
               </h2>
-              <p className="text-gray-500 mb-2">Total Price: BDT {totalPrice}</p>
-              <p className="text-gray-500 mb-6">Items: {cartItems.length > 0 ? cartItems.length : 0}</p>
+              <p className="text-gray-500 mb-2">
+                Total Price: BDT {totalPrice}
+              </p>
+              <p className="text-gray-500 mb-6">
+                Items: {cartItems.length > 0 ? cartItems.length : 0}
+              </p>
             </div>
 
             <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
