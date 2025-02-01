@@ -6,6 +6,7 @@ require('dotenv').config();
 const productRoutes = require("./routes/productRoute");
 const orderRoutes = require("./routes/orderRoute");
 const userRoutes = require("./routes/userRoute");
+const adminRoutes = require("./src/stats/adminStats");
 
 const port = process.env.PORT || 5000;
 
@@ -22,6 +23,7 @@ app.use(cors({
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/auth", userRoutes);
+app.use("/api/admin", adminRoutes);
 
 async function main() {
   await mongoose.connect(

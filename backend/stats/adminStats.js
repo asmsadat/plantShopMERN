@@ -21,25 +21,31 @@ router.get("/", async (req, res) => {
             }
         ]);
 
-        // 4. Trending books statistics: 
-        const trendingBooksCount = await Product.aggregate([
-            { $match: { trending: true } },  // Match only trending books
-            { $count: "trendingBooksCount" }  // Return the count of trending books
+        // 4. Trending products statistics: 
+        const trendingProductsCount = await Product.aggregate([
+            { $match: { trending: true } },  // Match only trending products
+            { $count: "trendingProductsCount" }  // Return the count of trending products
         ]);
         
         // If you want just the count as a number, you can extract it like this:
-        const trendingBooks = trendingBooksCount.length > 0 ? trendingBooksCount[0].trendingBooksCount : 0;
+        const trendingProducts = trendingProductsCount.length > 0 ? trendingProductsCount[0].trendingProductsCount : 0;
 
-        // 5. Total number of books
-        const totalBooks = await Book.countDocuments();
+        // 5. Total number of products
+        const totalProducts = await Product.countDocuments();
 
         // 6. Monthly sales (group by month and sum total sales for each month)
         const monthlySales = await Order.aggregate([
             {
+                $project: {
+                    month: { $dateToString: { format: "%Y-%m", date: { $toDate: "$createdAt" } } },
+                    totalPrice: 1
+                }
+            },
+            {
                 $group: {
-                    _id: { $dateToString: { format: "%Y-%m", date: "$createdAt" } },  // Group by year and month
-                    totalSales: { $sum: "$totalPrice" },  // Sum totalPrice for each month
-                    totalOrders: { $sum: 1 }  // Count total orders for each month
+                    _id: "$month",
+                    totalSales: { $sum: "$totalPrice" },
+                    totalOrders: { $sum: 1 }
                 }
             },
             { $sort: { _id: 1 } }  
@@ -47,9 +53,9 @@ router.get("/", async (req, res) => {
 
         // Result summary
         res.status(200).json({  totalOrders,
-            totalSales: totalSales[0]?.totalSales || 0,
-            trendingBooks,
-            totalBooks,
+            totalSales: totalSales.length > 0 ? totalSales[0].totalSales : 0,
+            trendingProducts,
+            totalProducts,
             monthlySales, });
       
     } catch (error) {

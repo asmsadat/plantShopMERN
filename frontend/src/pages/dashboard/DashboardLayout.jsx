@@ -16,7 +16,7 @@ const DashboardLayout = () => {
           href="/"
           className="inline-flex items-center justify-center h-20 w-20 bg-purple-600 hover:bg-purple-500 focus:bg-purple-500"
         >
-          <img src="/fav-icon.png" alt="" />
+          <img src="/logo.png" alt="" className="p-3"/>
         </a>
         <div className="flex-grow flex flex-col justify-between text-gray-500 bg-gray-800">
           <nav className="flex flex-col mx-4 my-6 space-y-4">
@@ -214,13 +214,12 @@ const DashboardLayout = () => {
         <main className="p-6 sm:p-10 space-y-6 ">
           <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
             <div className="mr-6">
-              <h1 className="text-4xl font-semibold mb-2">Dashboard</h1>
-              <h2 className="text-gray-600 ml-0.5">Book Store Inventory</h2>
+              <h1 className="text-4xl font-semibold mb-2">Admin Dashboard</h1>
             </div>
             <div className="flex flex-col md:flex-row items-start justify-end -mb-3">
               <Link
-                to="/dashboard/manage-books"
-                className="inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3"
+                to="/dashboard/manage-product"
+                className="inline-flex px-5 py-3 text-green-600 hover:text-green-800 focus:text-purple-700 hover:bg-green-100 focus:bg-green-100 border border-green-600 rounded-md mb-3"
               >
                 <svg
                   aria-hidden="true"
@@ -236,11 +235,11 @@ const DashboardLayout = () => {
                     d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
                   />
                 </svg>
-                Manage Books
+                Manage Products
               </Link>
               <Link
-                to="/dashboard/add-new-book"
-                className="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3"
+                to="/dashboard/add-product"
+                className="inline-flex px-5 py-3 text-white bg-green-600 hover:bg-green-800 rounded-md ml-6 mb-3"
               >
                 <svg
                   aria-hidden="true"
@@ -256,7 +255,7 @@ const DashboardLayout = () => {
                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                   />
                 </svg>
-                Add New Book
+                Add New Product
               </Link>
             </div>
           </div>
