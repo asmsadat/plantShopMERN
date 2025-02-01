@@ -9,7 +9,6 @@ function Home() {
         <Banner />
         <TopSellers />
         <Recommended />
-        <Footer />
     </>
   )
 }

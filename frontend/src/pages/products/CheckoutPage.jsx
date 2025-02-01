@@ -3,14 +3,14 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Swal from'sweetalert2';
+import Swal from "sweetalert2";
 import { useCreateOrderMutation } from "../../redux/features/orders/ordersAPI";
 
 const CheckoutPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
-  const navigate =  useNavigate();
+  const navigate = useNavigate();
   const totalPrice = cartItems
     .reduce((acc, item) => acc + item.price, 0)
     .toFixed(2);
@@ -91,6 +91,7 @@ const CheckoutPage = () => {
                     <div className="md:col-span-5">
                       <label htmlFor="full_name">Full Name</label>
                       <input
+                        {...register("name", { required: true })}
                         type="text"
                         name="name"
                         id="name"
@@ -100,7 +101,7 @@ const CheckoutPage = () => {
                     </div>
 
                     <div className="md:col-span-5">
-                      <label html="email">Email Address</label>
+                      <label htmlFor="email">Email Address</label>
                       <input
                         type="text"
                         name="email"
@@ -112,8 +113,9 @@ const CheckoutPage = () => {
                       />
                     </div>
                     <div className="md:col-span-5">
-                      <label html="phone">Phone Number</label>
+                      <label htmlFor="phone">Phone Number</label>
                       <input
+                        {...register("phone", { required: true })}
                         type="number"
                         name="phone"
                         id="phone"
@@ -125,6 +127,7 @@ const CheckoutPage = () => {
                     <div className="md:col-span-3">
                       <label htmlFor="address">Address / Street</label>
                       <input
+                        {...register("address", { required: true })}
                         type="text"
                         name="address"
                         id="address"
@@ -136,6 +139,7 @@ const CheckoutPage = () => {
                     <div className="md:col-span-2">
                       <label htmlFor="city">City</label>
                       <input
+                        {...register("city", { required: true })}
                         type="text"
                         name="city"
                         id="city"
@@ -144,107 +148,10 @@ const CheckoutPage = () => {
                       />
                     </div>
 
-                    <div className="md:col-span-2">
-                      <label htmlFor="country">Country / region</label>
-                      <div className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                        <input
-                          name="country"
-                          id="country"
-                          placeholder="Enter your country"
-                          className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                        />
-                        <button
-                          tabIndex="-1"
-                          className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600"
-                        >
-                          <svg
-                            className="w-4 h-4 mx-2 fill-current"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                          </svg>
-                        </button>
-                        <button
-                          tabIndex="-1"
-                          className="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600"
-                        >
-                          <svg
-                            className="w-4 h-4 mx-2 fill-current"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <polyline points="18 15 12 9 6 15"></polyline>
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="md:col-span-2">
-                      <label htmlFor="state">State / province</label>
-                      <div className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                        <input
-                          name="state"
-                          id="state"
-                          placeholder="Enter yout state"
-                          className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                        />
-                        <button className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                          <svg
-                            className="w-4 h-4 mx-2 fill-current"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                          </svg>
-                        </button>
-                        <button
-                          tabIndex="-1"
-                          className="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600"
-                        >
-                          <svg
-                            className="w-4 h-4 mx-2 fill-current"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <polyline points="18 15 12 9 6 15"></polyline>
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="md:col-span-1">
-                      <label htmlFor="zipcode">Zipcode</label>
-                      <input
-                        type="text"
-                        name="zipcode"
-                        id="zipcode"
-                        className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                        placeholder="Enter your zipcode"
-                      />
-                    </div>
-
                     <div className="md:col-span-5 mt-3">
                       <div className="inline-flex items-center">
                         <input
+                          onChange={(e) => setIsChecked(e.target.checked)}
                           type="checkbox"
                           name="billing_same"
                           id="billing_same"
@@ -263,11 +170,11 @@ const CheckoutPage = () => {
                       </div>
                     </div>
 
-                    <div className="md:col-span-5 text-right">
+                    <div className="md:col-span-5 flex justify-center">
                       <div className="inline-flex items-end">
                         <button
                           disabled={!isChecked}
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          className="bg-primary hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
                         >
                           Place an Order
                         </button>

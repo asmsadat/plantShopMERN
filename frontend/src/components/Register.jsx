@@ -20,6 +20,7 @@ const Register = () => {
     try {
       await registerUser(data.email, data.password);
       alert("User registered successfully!");
+      navigate("/login");
     } catch (error) {
       setMessage("Please provide a valid email and password");
       console.error(error);
@@ -40,7 +41,7 @@ const Register = () => {
   return (
     <div className="h-[calc(100vh-120px)] flex justify-center items-center ">
       <div className="w-full max-w-sm mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h2 className="text-xl font-semibold mb-4">Register</h2>
+        <h2 className="text-xl font-semibold mb-4 text-center">Register</h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
@@ -81,15 +82,15 @@ const Register = () => {
             <p className="text-red-500 text-xs italic mb-3">{message}</p>
           )}
 
-          <div>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none">
+          <div className='w-full flex justify-center'>
+            <button className="bg-primary hover:bg-green-800 text-white font-bold py-2 px-8 rounded focus:outline-none">
               Register{" "}
             </button>
           </div>
         </form>
-        <p className="align-baseline font-medium mt-4 text-sm">
+        <p className="align-baseline font-medium mt-4 text-sm text-center">
           Have an account? Please{" "}
-          <Link to="/login" className="text-blue-500 hover:text-blue-700">
+          <Link to="/login" className="text-green-500">
             Login
           </Link>
         </p>
@@ -97,7 +98,7 @@ const Register = () => {
         <div className="mt-4">
           <button
             onClick={handleGoogleSignIn}
-            className="w-full flex flex-wrap gap-1 items-center justify-center bg-secondary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+            className="w-full flex flex-wrap gap-1 items-center justify-center bg-secondary hover:bg-green-800 text-white font-bold py-2 px-4 rounded focus:outline-none"
           >
             <FaGoogle className="mr-2" />
             Sign in with Google
