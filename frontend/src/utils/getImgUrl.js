@@ -1,5 +1,9 @@
 function getImgUrl (name) {
-    return new URL(`../assets/books/${name}`, import.meta.url)
+    return new URL(`../assets/products/${name}`, import.meta.url)
 }
 
-export {getImgUrl}
+function getSliderImgUrl (name) {
+    return new URL(`../assets/sliderImg/${name}`, import.meta.url)
+}
+
+export {getImgUrl, getSliderImgUrl}

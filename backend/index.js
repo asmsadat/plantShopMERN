@@ -6,7 +6,7 @@ require('dotenv').config();
 const productRoutes = require("./routes/productRoute");
 const orderRoutes = require("./routes/orderRoute");
 const userRoutes = require("./routes/userRoute");
-const adminRoutes = require("./src/stats/adminStats");
+const adminRoutes = require("./stats/adminStats");
 
 const port = process.env.PORT || 5000;
 

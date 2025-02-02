@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
-import { FiShoppingCart } from 'react-icons/fi'
-import { getImgUrl } from '../../utils/getImgUrl'
-import { Link } from'react-router-dom'
-import { useDispatch } from'react-redux'
-import { addToCart } from '../../redux/features/cart/cartSlice'
+import { FiShoppingCart } from 'react-icons/fi';
+import { getImgUrl } from '../../utils/getImgUrl';
+import { Link } from'react-router-dom';
+import { useDispatch } from'react-redux';
+import { addToCart } from '../../redux/features/cart/cartSlice';
 
 const ProductCard = ({product}) => {
 
     const dispatch =  useDispatch();
 
     const handleAddToCart = (item) => {
-        dispatch(addToCart(item))
+        dispatch(addToCart(item));
     }
     
     return (
@@ -21,9 +21,9 @@ const ProductCard = ({product}) => {
                 <div className="sm:h-72 sm:flex-shrink-0 border rounded-md">
                     <Link to={`/products/${product._id}`}>
                         <img
-                            src={`${getImgUrl(product?.coverImage)}`}
-                            alt=""
-                            className="w-full bg-cover p-2 rounded-md cursor-pointer hover:scale-105 transition-all duration-200"
+                            src={`${getImgUrl(product?.image)}`}
+                            alt={product?.title}
+                            className="w-5 bg-cover p-2 rounded-md cursor-pointer hover:scale-105 transition-all duration-200"
                         />
                     </Link>
                 </div>
@@ -40,9 +40,9 @@ const ProductCard = ({product}) => {
                     </p>
                     <button 
                     onClick={() => handleAddToCart(product)}
-                    className="btn-primary px-6 space-x-1 flex items-center gap-1 ">
+                    className="btn-primary px-6 flex flex-col items-center gap-1">
                         <FiShoppingCart className="" />
-                        <span>Add to Cart</span>
+                        <span className='whitespace-nowrap'>Add to Cart</span>
                     </button>
                 </div>
             </div>

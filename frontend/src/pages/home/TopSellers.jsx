@@ -9,29 +9,34 @@ import { useFetchAllproductsQuery } from "../../redux/features/products/productA
 
 const categories = [
   "Choose a category",
-  "Indoor",
   "Flower",
-  "Horror",
-  "Adventure",
+  "Indoor",
+  "Succulent",
+  "Herb",
+  "Fruit",
+  "Vegetable",
+  "Aquatic",
+  "Medicinal",
+  "Groundcover",
+  "Aromatic",
 ];
 
 const TopSellers = () => {
-  
-  const [selectedCategory, setSelectedCategory] = useState("Choose a genre");
+  const [selectedCategory, setSelectedCategory] = useState("Choose a category");
 
-  const {data: products = []} = useFetchAllproductsQuery();
-  console.log(products)
+  const { data: products = [] } = useFetchAllproductsQuery();
+  console.log(products);
 
   const filteredProducts =
     selectedCategory === "Choose a category"
       ? products
       : products.filter(
-          (product) => product.category === selectedCategory.toLowerCase()
+          (product) => product.category.toLowerCase() === selectedCategory.toLowerCase()
         );
 
   return (
     <div className="py-10">
-      <h2 className="text-3xl font-semibold mb-6">Top Sellers</h2>
+      <h2 className="text-3xl font-semibold mb-6">Top Selling</h2>
       {/* category filtering */}
       <div className="mb-8 flex items-center">
         <select

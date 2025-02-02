@@ -1,7 +1,7 @@
 import { FiShoppingCart } from "react-icons/fi";
 import { useParams } from "react-router-dom";
-import { getImgUrl } from "../../utils/getImgUrl";
 import { useDispatch } from "react-redux";
+import { getImgUrl } from '../../utils/getImgUrl';
 import { addToCart } from "../../redux/features/cart/cartSlice";
 import { useFetchProductByIdQuery } from "../../redux/features/products/productAPI";
 
@@ -25,7 +25,7 @@ const SingleProduct = () => {
       <div className="">
         <div>
           <img
-            src={`${getImgUrl(product.image)}`}
+            src={`${getImgUrl(product?.image)}`}
             alt={product.title}
             className="mb-8"
           />
