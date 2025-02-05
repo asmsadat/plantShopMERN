@@ -37,10 +37,11 @@ function Navbar() {
               <img src={logo} alt="Logo" className="w-20" />
             </Link>
           </div>
-          <div className="relative flex items-center md:space-x-3 space-x-2">
-            <Link to="/">Home</Link>
-            <Link to="/">Category</Link>
-            <Link to="/">Contact us</Link>
+          <div className="relative flex items-center space-x-4 md:space-x-6 text-base md:text-lg font-medium text-green-800">
+            <Link to="/" className="hover:text-gray-600 transition duration-300">Home</Link>
+            <Link to="/" className="hover:text-gray-600 transition duration-300">Services</Link>
+            <Link to="/" className="hover:text-gray-600 transition duration-300">About Us</Link>
+            <Link to="/" className="hover:text-gray-600 transition duration-300">Contact</Link>
           </div>
 
           {/*  */}

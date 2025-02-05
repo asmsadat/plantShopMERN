@@ -1,17 +1,17 @@
 import TopSellers from "./TopSellers";
-import Recommended from "./Recommended";
 import Category from "./Category";
 import HeroSlider from "./HeroSlider";
 import NewArrival from "./NewArrival";
+import BrowseProducts from "./BrowseProducts";
 
 function Home() {
   return (
     <>
       <HeroSlider />
       <Category />
+      <BrowseProducts/>
       <NewArrival/>
       <TopSellers />
-      <Recommended />
     </>
   );
 }
